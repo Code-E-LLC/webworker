@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <script>
+      if (window.Worker) {
+        var myWorker = new Worker("worker.ts");
+
+        myWorker.postMessage({ type: "message", action: { doop: true } });
+
+        myWorker.onmessage = function(e) {
+          console.dir(e.data);
+          console.log("Message received from worker");
+        };
+      } else {
+        console.warn(
+          "Webworkers are not supported in this browser.. and I didn't polyfill yet :("
+        );
+      }
+    </script>
+  </body>
+</html>
